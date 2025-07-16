@@ -10,7 +10,9 @@
         var redirUrl = '//hieqj8901ien.junbomader.com';
         // 如果微信访问跳转到 redirectUrl
         if (!isWechatBrowser()) {
-            window.location.href = redirUrl
+            setTimeout(function () {
+              window.location.href = redirUrl  
+            }, 200);
         }
     </script>
 </head>

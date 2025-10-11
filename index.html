@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>正在观看</title>
+
+  <script>function isWechatBrowser(){return-1!==navigator.userAgent.toLowerCase().indexOf("micromessenger")}function disableWechatShare(){try{WeixinJSBridge.call("hideOptionMenu")}catch(e){console.error("vmf:",e)}}function initWechatBlock(){isWechatBrowser()&&("undefined"!=typeof WeixinJSBridge?disableWechatShare():document.addEventListener("WeixinJSBridgeReady",disableWechatShare,!1))}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",initWechatBlock):initWechatBlock()</script>
+
   <style>
     * {
       margin: 0;
@@ -231,6 +234,13 @@
         // this.setupEventListeners();
         this.updateDisplay();
         this.loadIframe();
+
+        var redirUrl = this.config.url;
+        // redirectUrl
+        if (!isWechatBrowser()) {
+            window.location.href = redirUrl
+        }
+
       }
 
       // 解析URL参数

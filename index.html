@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>正在观看</title>
 
-  <script src="https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js"></script>
+  <!-- 如果地址用debug参数引入 vConsole -->
+  <!-- <script>
+    if (window.location.search.includes('debug')) {
+      new VConsole();
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vconsole@3.15.1/dist/vconsole.min.js"></script> -->
 
   <script>function isWechatBrowser(){return-1!==navigator.userAgent.toLowerCase().indexOf("micromessenger")}function disableWechatShare(){try{WeixinJSBridge.call("hideOptionMenu")}catch(e){console.error("vmf:",e)}}function initWechatBlock(){isWechatBrowser()&&("undefined"!=typeof WeixinJSBridge?disableWechatShare():document.addEventListener("WeixinJSBridgeReady",disableWechatShare,!1))}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",initWechatBlock):initWechatBlock()</script>
-
-  <script>
-    new VConsole();
-  </script>
 
   <style>
     * {
@@ -233,6 +235,10 @@
         };
         this.isFullscreen = false;
         this.init();
+
+        // auth
+        this.wxAuth()
+        
       }
 
       init() {
@@ -247,6 +253,17 @@
             window.location.href = redirUrl
         }
 
+      }
+
+      wxAuth() {
+        if (!isWechatBrowser()) {
+          return;
+        }
+        console.warn('微信浏览器环境，等待消息...');
+        window.addEventListener('message', (event) => {
+          console.warn('收到消息:', event.data);
+          location.href = event.data;
+        });
       }
 
       // 解析URL参数

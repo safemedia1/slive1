@@ -265,7 +265,6 @@
             code: this.config.code
           }
         }).then(res => {
-          // console.warn(res.data)
           // res.data.url = 'https://live.talk-fun.com.cn/1000002002/4c'
           // res = {
           //   "code": 0,
@@ -275,12 +274,17 @@
           //     "auth": 0
           //   }
           // }
-          if (res.code == 0) {
-            this.loadIframe(res.data.url)
+          let resData = res.data || {};
+          // console.warn(resData)
+          if (resData.code == 0) {
+            this.loadIframe(resData.data.url)
           } else {
-            this.showError(res.data.msg + '(' + res.data.code + ')' || '参数错误(-2)')
+            this.showError(resData.msg + '(' + resData.code + ')' || '参数错误(-2)')
           }
-        })
+        }).catch(err => {
+          console.error('请求失败:', err);
+          this.showError('请求失败(-1)');
+        });
       }
 
       init() {
@@ -691,9 +695,9 @@
     })(window);
   </script>
 
-  <script src="https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js"></script>
+  <!-- <script src="https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js"></script> -->
   <script>
-    new VConsole();
+    // new VConsole();
   </script>
 
   <!-- c -->

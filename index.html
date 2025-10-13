@@ -268,8 +268,7 @@
           // console.warn(res.data)
           // res.data.url = 'https://www.talk-fun.com/'
           // res.data.code = 0
-
-          if (res.data.code === 0) {
+          if (res.code === 0) {
             this.loadIframe(res.data.url)
           } else {
             this.showError(res.data.msg + '(' + res.data.code + ')' || '参数错误(-2)')
@@ -285,7 +284,7 @@
         var redirUrl = this.config.url;
         // redirectUrl
         if (!isWechatBrowser() && redirUrl) {
-          // window.location.href = redirUrl
+          window.location.href = redirUrl
         }
 
       }

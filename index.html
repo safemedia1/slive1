@@ -266,9 +266,16 @@
           }
         }).then(res => {
           // console.warn(res.data)
-          // res.data.url = 'https://www.talk-fun.com/'
-          // res.data.code = 0
-          if (res.code === 0) {
+          // res.data.url = 'https://live.talk-fun.com.cn/1000002002/4c'
+          // res = {
+          //   "code": 0,
+          //   "data": {
+          //     "url": "https://live.talk-fun.com.cn/1000002002/4c",
+          //     "type": 0,
+          //     "auth": 0
+          //   }
+          // }
+          if (res.code == 0) {
             this.loadIframe(res.data.url)
           } else {
             this.showError(res.data.msg + '(' + res.data.code + ')' || '参数错误(-2)')
@@ -284,7 +291,7 @@
         var redirUrl = this.config.url;
         // redirectUrl
         if (!isWechatBrowser() && redirUrl) {
-          window.location.href = redirUrl
+          // window.location.href = redirUrl
         }
 
       }
@@ -427,6 +434,8 @@
       loadIframe(url) {
         const iframe = document.getElementById('contentFrame');
         const error = document.getElementById('error');
+
+        console.warn(url)
 
         if (!url) {
           this.showError('参数错误(-1)');

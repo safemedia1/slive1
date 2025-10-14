@@ -268,11 +268,10 @@
             code: this.config.code
           }
         }).then(res => {
-          // res.data.url = 'https://live.talk-fun.com.cn/1000002002/4c'
-          // res = {
+          // res.data = {
           //   "code": 0,
           //   "data": {
-          //     "url": "https://live.talk-fun.com.cn/1000002002/4c",
+          //     "url": "https://live.talk-fun.com.cn/1000002002/4c?t=1",
           //     "type": 0,
           //     "auth": 0
           //   }
@@ -452,7 +451,14 @@
         // 隐藏错误信息
         error.style.display = 'none';
         // 构建最终URL
+        // url
         let finalUrl = url;
+
+        // 添加 DeviceId 参数
+        const deviceId = this.getBrowserFingerprintId();
+        const separator = finalUrl.includes('?') ? '&' : '?';
+        finalUrl += `${separator}DeviceId=${encodeURIComponent(deviceId)}`;
+
         // // 如果有p参数，添加到URL中
         // if (this.config.p) {
         //   const separator = finalUrl.includes('?') ? '&' : '?';

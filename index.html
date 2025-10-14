@@ -259,7 +259,7 @@
         // console.warn(this.config)
         Http.get('https://live.talk-fun.com/open/live/redirect.php', {
           headers: {
-            "DeviceId": this.getBrowserFingerprintId(),
+            "x-device-id": this.getBrowserFingerprintId(),
           },
           params: {
             act: "check",

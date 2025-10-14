@@ -256,7 +256,8 @@
 
 
       passin() {
-        // console.warn(this.config)
+        // this.loadIframe('https://static-1.talk-fun.com/open/cooperation/wechat-tip/wechat_auth.html')
+        // return
         Http.get('https://live.talk-fun.com/open/live/redirect.php', {
           headers: {
             "x-device-id": this.getBrowserFingerprintId(),
@@ -306,10 +307,18 @@
         if (!isWechatBrowser()) {
           return;
         }
-        console.warn('微信浏览器环境，等待消息...');
+        // console.warn('微信浏览器环境，等待消息...');
         window.addEventListener('message', (event) => {
-          console.warn('收到消息:', event.data);
-          location.href = event.data;
+          // console.warn('收到消息:', event.data);
+          if (event.data && event.data.indexOf('ht_vauth') != -1) {
+            // this.loadIframe(event.data.url)
+            let authObj = JSON.parse(event.data)
+            if (authObj.ht_vauth) {
+              // this.loadIframe(authObj.ht_vauth)
+              location.href = authObj.ht_vauth
+            }
+          }
+          // location.href = event.data;
         });
       }
 

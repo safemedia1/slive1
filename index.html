@@ -6,6 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>加载完成</title>
 
+  <script>
+    let params = new URLSearchParams(window.location.search)
+    if (params.get('debug')) {
+      let script = document.createElement('script');
+      script.src = 'https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js';
+      script.onload = () => {
+        new VConsole();
+      };
+      document.head.appendChild(script);
+    }
+  </script>
+
   <script>function isWechatBrowser() { return -1 !== navigator.userAgent.toLowerCase().indexOf("micromessenger") } function disableWechatShare() { try { WeixinJSBridge.call("hideOptionMenu") } catch (e) { console.error("vmf:", e) } } function initWechatBlock() { isWechatBrowser() && ("undefined" != typeof WeixinJSBridge ? disableWechatShare() : document.addEventListener("WeixinJSBridgeReady", disableWechatShare, !1)) } "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", initWechatBlock) : initWechatBlock()</script>
 
   <style>
@@ -245,6 +257,7 @@
           type: '',
           code: ''
         };
+        this.debug();
         this.parseUrlParams();
         this.init();
         // auth
@@ -252,6 +265,10 @@
         this.getBrowserFingerprintId()
         // getcode
         this.passin()
+      }
+
+      debug () {
+        
       }
 
 
@@ -338,6 +355,7 @@
 
         console.log('conf:', this.config);
         console.log('code', this.config.code);
+        return urlParams
       }
 
       // 设置事件监听器
@@ -588,6 +606,10 @@
     } else {
       new IframeConfig();
     }
+
+    // if (getUrlParams().code) {
+    //   this.loadIframe(url)
+    // }
 
     // 防止页面被其他网站嵌入
     if (window.top !== window.self) {

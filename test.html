@@ -2,6 +2,7 @@
   <head>
     <title>Test</title>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -9,7 +10,22 @@
     <button id="goBtn">前往直播盾</button>
     <script>
       document.getElementById('goBtn').addEventListener('click', function() {
-        window.location.replace('https://www.zhibodun.com/#');
+        // window.location.reload();
+        // setTimeout(() => {
+          // const w = window.open('https://zhibodun.com/', '_blank', 'noopener,noreferrer');
+          // if (w) {
+          //   // 断开反向访问，屏蔽 opener
+          //   try { w.opener = null; } catch (e) {}
+          //   // 短暂展示后立即清空并尝试停止刷新
+          //   setTimeout(() => {
+          //     try { w.location.replace('about:blank'); } catch (e) {}
+          //     try { if (typeof w.stop === 'function') w.stop(); } catch (e) {}
+          //   }, 300);
+          // }
+          // 清除当前页在历史中的痕迹
+          window.location.replace('https://g6rd7.myyedbe.cn');
+        // }, 0);
+        // window.close()
       });
     </script>
     </body>
